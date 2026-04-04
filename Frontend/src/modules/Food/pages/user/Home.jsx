@@ -2359,15 +2359,33 @@ export default function Home() {
             {heroBannerImages.map((image, index) => {
               const bannerData = heroBannersData[index];
               const isVideo = bannerData?.type === 'video' || (typeof image === 'string' && image.toLowerCase().endsWith('.mp4'));
+              const linkedRestaurants = bannerData?.linkedRestaurants || [];
+              const canOpenLinkedRestaurant = linkedRestaurants.length > 0;
 
               return (
                 <div
                   key={`${index}-${image}`}
-                  className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    canOpenLinkedRestaurant && currentBannerIndex === index ? "cursor-pointer" : ""
+                  }`}
                   style={{
                     opacity: currentBannerIndex === index ? 1 : 0,
                     zIndex: currentBannerIndex === index ? 2 : 1,
-                    pointerEvents: "none",
+                    pointerEvents:
+                      currentBannerIndex === index && canOpenLinkedRestaurant
+                        ? "auto"
+                        : "none",
+                  }}
+                  onClick={() => {
+                    if (!canOpenLinkedRestaurant) return;
+                    const firstRestaurant = linkedRestaurants[0];
+                    const restaurantSlug =
+                      firstRestaurant.slug ||
+                      firstRestaurant.restaurantId ||
+                      firstRestaurant._id;
+                    if (restaurantSlug) {
+                      navigate(`/restaurants/${restaurantSlug}`);
+                    }
                   }}>
                   {isVideo ? (
                     <video
@@ -2393,21 +2411,6 @@ export default function Home() {
               );
             })}
           </div>
-
-          <button
-            type="button"
-            className="absolute inset-0 z-20 h-full w-full border-0 p-0 bg-transparent text-left"
-            onClick={() => {
-              const bannerData = heroBannersData[currentBannerIndex];
-              const linkedRestaurants = bannerData?.linkedRestaurants || [];
-              if (linkedRestaurants.length > 0) {
-                const firstRestaurant = linkedRestaurants[0];
-                const restaurantSlug = firstRestaurant.slug || firstRestaurant.restaurantId || firstRestaurant._id;
-                navigate(`/restaurants/${restaurantSlug}`);
-              }
-            }}
-            aria-label={`Open hero banner ${currentBannerIndex + 1}`}
-          />
 
           <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-1.5 px-3 py-1.5 bg-black/20 backdrop-blur-md rounded-full border border-white/10 z-30">
             {heroBannerImages.map((_, index) => (

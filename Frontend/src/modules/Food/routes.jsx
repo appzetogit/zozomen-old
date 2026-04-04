@@ -83,12 +83,9 @@ export default function App() {
       <PushSoundEnableButton />
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* User Module mounted on root */}
-          <Route path="/" element={<UserRouter />} />
-          <Route
-            path="user/*"
-            element={<Navigate to="/" replace />}
-          />
+          {/* User Module mounted on both root and /user paths */}
+          <Route path="/*" element={<UserRouter />} />
+          <Route path="user/*" element={<UserRouter />} />
 
           {/* Restaurant Module - Already mapped to /restaurant */}
           <Route
@@ -105,7 +102,7 @@ export default function App() {
           />
 
           {/* Legacy Redirects & Fallbacks */}
-          <Route path="*" element={<UserRouter />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     </>
