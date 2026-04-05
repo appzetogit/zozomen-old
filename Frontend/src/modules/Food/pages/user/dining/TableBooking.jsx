@@ -7,6 +7,7 @@ import { diningAPI, restaurantAPI } from "@food/api"
 import useAppBackNavigation from "@food/hooks/useAppBackNavigation"
 import Loader from "@food/components/Loader"
 import { toast } from "sonner"
+import { RED } from "@food/constants/color"
 
 const BOOKING_DRAFT_KEY = "food_dining_booking_draft_v1"
 
@@ -247,7 +248,7 @@ export default function TableBooking() {
 
   return (
     <AnimatedPage className="min-h-screen bg-[#f5f6fb] pb-40">
-      <div className="relative overflow-hidden bg-gradient-to-b from-[#ffe7c6] via-[#fff1d7] to-[#f5f6fb] px-4 pb-10 pt-5">
+      <div className="relative overflow-hidden px-4 pb-10 pt-5" style={{ background: `linear-gradient(to b, ${RED}20, ${RED}10, #f5f6fb)` }}>
         <div className="absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.65),transparent_65%)]" />
 
         <div className="relative z-10">
@@ -267,9 +268,9 @@ export default function TableBooking() {
 
       <div className="mx-auto -mt-4 max-w-md space-y-4 px-4">
         {!isDiningEnabled && (
-          <section className="rounded-[22px] border border-amber-200 bg-amber-50 px-4 py-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
-            <p className="text-sm font-semibold text-amber-900">Dining bookings are paused by this restaurant.</p>
-            <p className="mt-1 text-xs text-amber-800">You can still view details, but new table bookings are disabled right now.</p>
+          <section className="rounded-[22px] border border-red-200 bg-red-50 px-4 py-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
+            <p className="text-sm font-semibold text-red-900">Dining bookings are paused by this restaurant.</p>
+            <p className="mt-1 text-xs text-red-800">You can still view details, but new table bookings are disabled right now.</p>
           </section>
         )}
 
@@ -305,9 +306,10 @@ export default function TableBooking() {
                   onClick={() => setSelectedDate(date)}
                   className={`rounded-[18px] border px-3 py-4 text-center transition-colors ${
                     active
-                      ? "border-[#ef8f98] bg-[#fffaf9]"
+                      ? "bg-red-50"
                       : "border-[#ececf2] bg-white"
                   }`}
+                  style={active ? { borderColor: RED } : {}}
                 >
                   <span className="block text-sm font-medium text-[#444b5f]">
                     {index === 0 ? "Today" : index === 1 ? "Tomorrow" : date.toLocaleDateString("en-IN", { weekday: "long" })}
@@ -336,9 +338,10 @@ export default function TableBooking() {
                   onClick={() => setSelectedMealPeriod(period.id)}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
                     active
-                      ? "border-[#ef8f98] bg-white text-[#d64f63]"
+                      ? "bg-white"
                       : "border-[#ececf2] bg-[#fafafc] text-[#666f82]"
                   }`}
+                  style={active ? { borderColor: RED, color: RED } : {}}
                 >
                   {period.label}
                 </button>
@@ -360,12 +363,13 @@ export default function TableBooking() {
                     onClick={() => setSelectedSlot(slot)}
                     className={`rounded-[16px] border px-3 py-4 text-center transition-colors ${
                       active
-                        ? "border-[#ef8f98] bg-[#fffaf9]"
+                        ? "bg-red-50"
                         : "border-[#ececf2] bg-white"
                     }`}
+                    style={active ? { borderColor: RED } : {}}
                   >
                     <span className="block text-sm font-medium text-[#334155]">{slot}</span>
-                    <span className="mt-1 block text-xs font-medium text-[#2d5ea8]">
+                    <span className="mt-1 block text-xs font-medium" style={{ color: RED }}>
                       {getOfferLabel(slot)}
                     </span>
                   </button>
@@ -387,11 +391,12 @@ export default function TableBooking() {
           <Button
             disabled={!canProceed}
             onClick={handleProceed}
-            className={`h-14 w-full rounded-2xl text-lg font-bold ${
+            className={`h-14 w-full rounded-2xl text-lg font-bold transition-colors ${
               canProceed
-                ? "bg-[#eb4d60] text-white hover:bg-[#d73f52]"
-                : "bg-[#a4abba] text-white/95"
+                ? "text-white opacity-100 hover:opacity-90"
+                : "bg-gray-300 text-white/95"
             }`}
+            style={canProceed ? { backgroundColor: RED } : {}}
           >
             {!isDiningEnabled
               ? "Dining paused"

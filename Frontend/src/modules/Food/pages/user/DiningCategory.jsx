@@ -11,6 +11,7 @@ import { useProfile } from "@food/context/ProfileContext"
 import { FaLocationDot } from "react-icons/fa6"
 import { diningAPI } from "@food/api"
 import { getRestaurantAvailabilityStatus } from "@food/utils/restaurantAvailability"
+import { RED } from "../../constants/color"
 
 const slugifyRestaurant = (value) =>
   String(value || "")
@@ -138,7 +139,7 @@ export default function DiningCategory() {
             className="h-auto rounded-full border border-[#e7d8c5] bg-white px-4 py-2 text-left hover:bg-[#fff3e6] dark:border-gray-700 dark:bg-[#1a1a1a] dark:hover:bg-gray-800"
           >
             <div className="flex items-center gap-2">
-              <FaLocationDot className="h-4 w-4 text-[#EB590E]" />
+              <FaLocationDot className="h-4 w-4" style={{ color: RED }} />
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#aa8b68] dark:text-gray-400">Dining In</p>
                 <p className="text-sm font-bold text-[#2f2215] dark:text-white">{cityName}</p>
@@ -152,14 +153,14 @@ export default function DiningCategory() {
         <div className="mb-6 rounded-[28px] border border-[#f0dfca] bg-gradient-to-br from-[#fff4e7] via-white to-[#fff9f3] p-6 shadow-[0_18px_60px_rgba(90,55,20,0.08)] dark:border-gray-800 dark:bg-gradient-to-br dark:from-[#161616] dark:via-[#101010] dark:to-[#1a1a1a] dark:shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.34em] text-[#c07a3a] dark:text-orange-300">Dining Category</p>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.34em]" style={{ color: RED }}>Dining Category</p>
               <h1 className="text-3xl font-black tracking-tight text-[#23180f] sm:text-4xl dark:text-white">{heading}</h1>
               <p className="mt-2 max-w-2xl text-sm text-[#6b5641] dark:text-gray-300">
                 Explore all restaurants linked to this dining category, check their timings, preview the menu, and jump straight into table booking.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 self-start rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#6b5641] shadow-sm dark:border dark:border-gray-700 dark:bg-[#1a1a1a] dark:text-gray-300">
-              <MapPin className="h-4 w-4 text-[#EB590E]" />
+              <MapPin className="h-4 w-4" style={{ color: RED }} />
               <span>{restaurants.length} places found</span>
             </div>
           </div>
@@ -248,7 +249,7 @@ export default function DiningCategory() {
                       </div>
 
                       <div className="flex items-center gap-2 text-sm text-[#5f4c39] dark:text-gray-300">
-                        <UtensilsCrossed className="h-4 w-4 text-[#EB590E]" />
+                        <UtensilsCrossed className="h-4 w-4" style={{ color: RED }} />
                         <span className="line-clamp-1">{restaurant.cuisine}</span>
                       </div>
 
@@ -257,14 +258,14 @@ export default function DiningCategory() {
                           <Clock className="h-3.5 w-3.5" />
                           <span>{restaurant.availability?.isOpen ? "Open now" : "Closed now"}</span>
                         </div>
-                        <div className="inline-flex items-center rounded-full bg-[#fff4e7] px-3 py-1.5 text-xs font-semibold text-[#a25b1f] dark:bg-[#2a1d12] dark:text-orange-300">
+                        <div className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-700 dark:bg-gray-800 dark:text-gray-300">
                           {formatTimingLabel(restaurant.availability)}
                         </div>
                       </div>
 
                       <div className="flex items-center justify-between border-t border-dashed border-[#ead7c0] pt-4 dark:border-gray-700">
                         <div className="text-sm font-semibold text-[#4c3b2c] dark:text-gray-200">{restaurant.price}</div>
-                        <div className="inline-flex items-center gap-2 text-sm font-bold text-[#EB590E]">
+                        <div className="inline-flex items-center gap-2 text-sm font-bold" style={{ color: RED }}>
                           <BadgePercent className="h-4 w-4" />
                           <span>Menu & booking</span>
                         </div>

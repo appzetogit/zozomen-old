@@ -19,6 +19,7 @@ import { restaurantAPI, adminAPI } from "@food/api"
 import { isModuleAuthenticated } from "@food/utils/auth"
 import { flattenMenuItems, getMenuFromResponse } from "@food/utils/menuItems"
 import { calculateDistance, formatDistance } from "@food/utils/common"
+import { RED } from "@food/constants/color"
 const debugLog = (...args) => {}
 const debugWarn = (...args) => {}
 const debugError = (...args) => {}
@@ -964,7 +965,10 @@ export default function Under250() {
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <div className={`w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-md transition-all ${!activeCategory ? 'ring-2 ring-[#EB590E] ring-offset-2' : ''}`}>
+                <div 
+                  className={`w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-md transition-all ${!activeCategory ? 'ring-2 ring-offset-2' : ''}`}
+                  style={!activeCategory ? { ringColor: RED } : {}}
+                >
                   <OptimizedImage
                     src={offerImage}
                     alt="All"
@@ -974,7 +978,10 @@ export default function Under250() {
                     placeholder="blur"
                   />
                 </div>
-                <span className={`text-xs sm:text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200 text-center pb-1 ${!activeCategory ? 'text-[#EB590E]' : ''}`}>
+                <span 
+                  className={`text-xs sm:text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200 text-center pb-1`}
+                  style={!activeCategory ? { color: RED } : {}}
+                >
                   All
                 </span>
               </motion.div>
@@ -989,7 +996,10 @@ export default function Under250() {
                       whileTap={{ scale: 0.95 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
-                      <div className={`w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-md transition-all ${isActive ? 'ring-2 ring-[#EB590E] ring-offset-2' : ''}`}>
+                      <div 
+                        className={`w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden shadow-md transition-all ${isActive ? 'ring-2 ring-offset-2' : ''}`}
+                        style={isActive ? { ringColor: RED } : {}}
+                      >
                         <OptimizedImage
                           src={category.image}
                           alt={category.name}
@@ -999,7 +1009,10 @@ export default function Under250() {
                           placeholder="blur"
                         />
                       </div>
-                      <span className={`text-xs sm:text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200 text-center pb-1 ${isActive ? 'text-[#EB590E]' : ''}`}>
+                      <span 
+                        className={`text-xs sm:text-sm md:text-base font-semibold text-gray-800 dark:text-gray-200 text-center pb-1`}
+                        style={isActive ? { color: RED } : {}}
+                      >
                         {category.name.length > 7 ? `${category.name.slice(0, 7)}...` : category.name}
                       </span>
                     </motion.div>
@@ -1026,9 +1039,10 @@ export default function Under250() {
               variant="outline"
               onClick={() => setUnder30MinsFilter(!under30MinsFilter)}
               className={`h-8 sm:h-9 md:h-10 px-3 sm:px-4 md:px-5 rounded-md flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 font-medium transition-all text-sm md:text-base ${under30MinsFilter
-                ? 'bg-[#EB590E] text-white border border-[#EB590E] hover:bg-[#D94F0C]'
+                ? 'text-white'
                 : 'bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-300'
                 }`}
+              style={under30MinsFilter ? { backgroundColor: RED, borderColor: RED } : {}}
             >
               <Timer className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5" />
               <span className="text-xs sm:text-sm md:text-base font-medium">Under 30 mins</span>
@@ -1167,7 +1181,8 @@ export default function Under250() {
                                     <Button
                                       variant={"outline"}
                                       size="sm"
-                                      className="bg-[#FFF2EB] text-[#EB590E] border-[#EB590E] hover:bg-[#EB590E] hover:text-white h-7 md:h-8 lg:h-9 px-3 md:px-4 lg:px-5 text-xs md:text-sm lg:text-base"
+                                      className="h-7 md:h-8 lg:h-9 px-3 md:px-4 lg:px-5 text-xs md:text-sm lg:text-base transition-all"
+                                      style={{ backgroundColor: `${RED}1A`, color: RED, borderColor: RED }}
                                     >
                                       View cart
                                     </Button>
@@ -1177,10 +1192,11 @@ export default function Under250() {
                                     variant={"outline"}
                                     size="sm"
                                     disabled={shouldShowGrayscale}
-                                    className={`h-7 md:h-8 lg:h-9 px-3 md:px-4 lg:px-5 text-xs md:text-sm lg:text-base ${shouldShowGrayscale
+                                    className={`h-7 md:h-8 lg:h-9 px-3 md:px-4 lg:px-5 text-xs md:text-sm lg:text-base transition-all ${shouldShowGrayscale
                                       ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 border-gray-300 dark:border-gray-700 cursor-not-allowed opacity-50'
-                                      : 'bg-[#FFF2EB] text-[#EB590E] border-[#EB590E] hover:bg-[#EB590E] hover:text-white'
+                                      : 'hover:text-white'
                                       }`}
+                                    style={!shouldShowGrayscale ? { backgroundColor: `${RED}1A`, color: RED, borderColor: RED } : {}}
                                     onClick={(e) => {
                                       e.stopPropagation()
                                       if (!shouldShowGrayscale) {
@@ -1250,7 +1266,8 @@ export default function Under250() {
                 <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">Sort By</h2>
                 <button
                   onClick={handleClearAll}
-                  className="text-[#EB590E] dark:text-[#F97316] font-medium text-sm md:text-base"
+                  style={{ color: RED }}
+                  className="font-medium text-sm md:text-base"
                 >
                   Clear all
                 </button>
@@ -1260,18 +1277,22 @@ export default function Under250() {
               <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 md:py-6">
                 <div className="flex flex-col gap-3 md:gap-4">
                   {sortOptions.map((option) => (
-                    <button
-                      key={option.id || 'relevance'}
-                      onClick={() => setDraftSelectedSort(option.id)}
-                      className={`px-4 md:px-5 lg:px-6 py-3 md:py-4 rounded-xl border text-left transition-colors ${draftSelectedSort === option.id
-                        ? 'border-[#EB590E] bg-[#FFF2EB] dark:bg-orange-900/20'
-                        : 'border-gray-200 dark:border-gray-800 hover:border-[#EB590E]'
-                        }`}
-                    >
-                      <span className={`text-sm md:text-base lg:text-lg font-medium ${draftSelectedSort === option.id ? 'text-[#EB590E] dark:text-[#F97316]' : 'text-gray-700 dark:text-gray-300'}`}>
-                        {option.label}
-                      </span>
-                    </button>
+                      <button
+                        key={option.id || 'relevance'}
+                        onClick={() => setDraftSelectedSort(option.id)}
+                        className={`px-4 md:px-5 lg:px-6 py-3 md:py-4 rounded-xl border text-left transition-colors`}
+                        style={draftSelectedSort === option.id 
+                          ? { borderColor: RED, backgroundColor: `${RED}1A` }
+                          : { borderColor: '#e5e7eb' }
+                        }
+                      >
+                        <span 
+                          className={`text-sm md:text-base lg:text-lg font-medium`}
+                          style={draftSelectedSort === option.id ? { color: RED } : { color: '#374151' }}
+                        >
+                          {option.label}
+                        </span>
+                      </button>
                   ))}
                 </div>
               </div>
@@ -1286,7 +1307,8 @@ export default function Under250() {
                 </button>
                 <button
                   onClick={handleApply}
-                  className="flex-1 py-3 md:py-4 font-semibold rounded-xl transition-colors text-sm md:text-base bg-[#EB590E] text-white hover:bg-[#D94F0C]"
+                  className="flex-1 py-3 md:py-4 font-semibold rounded-xl transition-colors text-sm md:text-base text-white"
+                  style={{ backgroundColor: RED }}
                 >
                   Apply
                 </button>
@@ -1431,7 +1453,7 @@ export default function Under250() {
                 {selectedItem.customisable && (
                   <div className="flex items-center gap-2 mb-4">
                     <div className="flex-1 h-0.5 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#EB590E] rounded-full" style={{ width: '50%' }} />
+                      <div className="h-full rounded-full" style={{ width: '50%', backgroundColor: RED }} />
                     </div>
                     <span className="text-xs text-gray-600 dark:text-gray-400 font-medium whitespace-nowrap">
                       highly reordered
@@ -1499,6 +1521,7 @@ export default function Under250() {
                       ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-600 cursor-not-allowed opacity-50'
                       : 'bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white'
                       }`}
+                    style={!shouldShowGrayscale ? { backgroundColor: RED, borderColor: RED } : {}}
                     onClick={(e) => {
                       if (!shouldShowGrayscale) {
                         updateItemQuantity(selectedItem, itemDetailQuantity, e)
@@ -1567,7 +1590,10 @@ export default function Under250() {
                   <button
                     key={option.id}
                     onClick={() => handleShareOption(option.id)}
-                    className="rounded-2xl border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-200 hover:border-[#EB590E] hover:text-[#EB590E] transition-colors"
+                    className="rounded-2xl border border-gray-200 dark:border-gray-700 px-4 py-3 text-sm font-medium text-gray-800 dark:text-gray-200 transition-colors"
+                    style={{ '--hover-color': RED }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = RED; e.currentTarget.style.color = RED }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.color = '' }}
                   >
                     {option.label}
                   </button>
@@ -1583,4 +1609,3 @@ export default function Under250() {
     </div>
   )
 }
-

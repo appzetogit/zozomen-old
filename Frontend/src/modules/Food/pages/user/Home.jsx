@@ -94,6 +94,7 @@ import OptimizedImage from "@food/components/OptimizedImage";
 import { getRestaurantAvailabilityStatus } from "@food/utils/restaurantAvailability";
 import HomeHeader from "@food/components/user/home/HomeHeader";
 import PromoRow from "@food/components/user/home/PromoRow";
+import { RED } from "@food/constants/color";
 // import FestBanner from "@food/components/user/home/FestBanner";
 
 // Explore More Icons
@@ -2450,11 +2451,14 @@ export default function Home() {
             className="flex-shrink-0 flex flex-col items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95"
             onClick={() => navigate("/user/under-250")}
           >
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-[#EB590E] rounded-b-full rounded-t-sm shadow-md border-t-4 border-orange-200 flex flex-col items-center justify-center p-1">
+            <div 
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-b-full rounded-t-sm shadow-md border-t-4 border-red-200 flex flex-col items-center justify-center p-1"
+              style={{ backgroundColor: RED }}
+            >
               <span className="text-[10px] sm:text-xs font-bold text-white text-center leading-tight">UNDER</span>
               <span className="text-sm sm:text-base font-extrabold text-white">₹200</span>
               <div className="w-10 h-3.5 bg-white rounded-full mt-1 flex items-center justify-center">
-                <span className="text-[8px] font-bold text-[#EB590E]">Explore</span>
+                <span className="text-[8px] font-bold" style={{ color: RED }}>Explore</span>
               </div>
             </div>
             <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Offers</span>
@@ -2470,7 +2474,10 @@ export default function Home() {
                 className="flex-shrink-0 flex flex-col items-center gap-2 group transition-all duration-300 hover:-translate-y-1"
                 style={{ animation: `fade-in-up 0.5s ease-out forwards ${index * 0.05}s`, opacity: 0 }}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 group-hover:border-[#EB590E] transition-colors">
+                <div 
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 transition-colors group-hover:border-[var(--hover-border)]"
+                  style={{ '--hover-border': RED }}
+                >
                   <OptimizedImage
                     src={category.image}
                     alt={category.name}
@@ -2490,8 +2497,11 @@ export default function Home() {
               className="flex-shrink-0 flex flex-col items-center gap-2 cursor-pointer group"
               onClick={() => setShowAllCategoriesModal(true)}
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-orange-50 dark:bg-orange-950 flex items-center justify-center border border-orange-100 group-hover:border-[#EB590E] transition-all">
-                <Plus className="w-6 h-6 text-[#EB590E]" />
+              <div 
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-red-50 dark:bg-red-950 flex items-center justify-center border border-red-100 transition-all group-hover:border-[var(--hover-border)]"
+                style={{ '--hover-border': RED }}
+              >
+                <Plus className="w-6 h-6" style={{ color: RED }} />
               </div>
               <span className="text-xs font-medium text-gray-700">See All</span>
             </div>
@@ -2626,8 +2636,8 @@ export default function Home() {
                               <p className="text-sm font-semibold text-gray-900 dark:text-white truncate tracking-tight">
                                 {restaurant.name}
                               </p>
-                              <p className="text-[10px] text-orange-600 font-bold mt-1 flex items-center gap-1 uppercase tracking-wider">
-                                <Flame className="w-3.5 h-3.5 fill-orange-600" />
+                              <p className="text-[10px] font-bold mt-1 flex items-center gap-1 uppercase tracking-wider" style={{ color: RED }}>
+                                <Flame className="w-3.5 h-3.5" style={{ fill: RED }} />
                                 Near & Fast
                               </p>
                             </div>
@@ -2674,8 +2684,8 @@ export default function Home() {
                       >
                         <Link to={item.href} className="flex-shrink-0">
                           <div className="flex flex-col items-center gap-3 w-24 sm:w-28 group">
-                            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white dark:bg-[#1a1a1a] flex items-center justify-center shadow-[0_4px_15px_-3px_rgba(0,0,0,0.08)] group-hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.12)] transition-all duration-500 overflow-hidden p-3 border border-gray-100 dark:border-gray-800 group-hover:border-orange-500/30">
-                              <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br ${index % 3 === 0 ? 'from-orange-500 to-red-500' : index % 3 === 1 ? 'from-blue-500 to-purple-500' : 'from-green-500 to-teal-500'}`} />
+                            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-white dark:bg-[#1a1a1a] flex items-center justify-center shadow-[0_4px_15px_-3px_rgba(0,0,0,0.08)] group-hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.12)] transition-all duration-500 overflow-hidden p-3 border border-gray-100 dark:border-gray-800 group-hover:border-red-500/30">
+                              <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br ${index % 3 === 0 ? 'from-red-500 to-red-600' : index % 3 === 1 ? 'from-blue-500 to-purple-500' : 'from-green-500 to-teal-500'}`} />
 
                               <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
                                 <motion.div

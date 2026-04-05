@@ -48,6 +48,8 @@ import { authAPI, userAPI } from "@food/api";
 import { firebaseAuth } from "@food/firebase";
 import { clearModuleAuth } from "@food/utils/auth";
 import { toast } from "sonner";
+import { RED } from "@food/constants/color";
+
 const debugLog = (...args) => { };
 const debugWarn = (...args) => { };
 const debugError = (...args) => { };
@@ -596,7 +598,8 @@ export default function Profile() {
                       e.stopPropagation();
                       handleShareReferral();
                     }}
-                    className="inline-flex items-center gap-1 text-xs text-[#EB590E] font-medium ml-2 px-2 py-1 rounded-md"
+                    className="inline-flex items-center gap-1 text-xs font-medium ml-2 px-2 py-1 rounded-md"
+                    style={{ color: RED }}
                     disabled={!referralLink}>
                     <Share2 className="h-3.5 w-3.5" />
                     Refer
@@ -665,8 +668,9 @@ export default function Profile() {
                     <motion.span
                       className={`text-xs font-medium px-2 py-1 rounded ${isComplete
                           ? "bg-green-100 text-green-700 border border-green-300"
-                          : "bg-orange-100 text-orange-800"
+                          : "bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300"
                         }`}
+                      style={!isComplete ? { color: RED, backgroundColor: `${RED}10` } : {}}
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.2 }}>
                       {profileCompletion}% completed
@@ -756,7 +760,7 @@ export default function Profile() {
         {/* Collections Section */}
         <div className="mb-3">
           <div className="flex items-center gap-2 mb-2 px-1">
-            <div className="w-1 h-4 bg-[#EB590E] rounded"></div>
+            <div className="w-1 h-4 rounded" style={{ backgroundColor: RED }}></div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">
               Collections
             </h3>
@@ -792,7 +796,7 @@ export default function Profile() {
         {/* Food Orders Section */}
         <div className="mb-3">
           <div className="flex items-center gap-2 mb-2 px-1">
-            <div className="w-1 h-4 bg-[#EB590E] rounded"></div>
+            <div className="w-1 h-4 rounded" style={{ backgroundColor: RED }}></div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">
               Food Orders
             </h3>
@@ -803,7 +807,34 @@ export default function Profile() {
                 whileHover={{ x: 4, scale: 1.01 }}
                 transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
                 <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
-                  <CardContent className="p-4 flex items-center justify-between">
+                  <CardContent className="p-4  flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <motion.div
+                        className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
+                        whileHover={{ rotate: 15, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}>
+                        <ShoppingCart className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                      </motion.div>
+                      <span className="text-base font-medium text-gray-900 dark:text-white">
+                        Your orders
+                      </span>
+                    </div>
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}>
+                      <ChevronRight className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </Link>
+
+            <Link to="/food/user/dining/my-bookings" className="block">
+              <motion.div
+                whileHover={{ x: 4, scale: 1.01 }}
+                transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
+                <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
+                  <CardContent className="p-4  flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <motion.div
                         className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
@@ -812,7 +843,7 @@ export default function Profile() {
                         <Building2 className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                       </motion.div>
                       <span className="text-base font-medium text-gray-900 dark:text-white">
-                        Your orders
+                        Table bookings
                       </span>
                     </div>
                     <motion.div
@@ -828,47 +859,20 @@ export default function Profile() {
         </div>
 
         {/* More Section */}
-        <div className="mb-8 pb-8">
+        <div className="mb-3">
           <div className="flex items-center gap-2 mb-2 px-1">
-            <div className="w-1 h-4 bg-[#EB590E] rounded"></div>
+            <div className="w-1 h-4 rounded" style={{ backgroundColor: RED }}></div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">
               More
             </h3>
           </div>
           <div className="space-y-2">
-            <Link to="/user/profile/support" className="block">
+            <Link to="/user/about" className="block">
               <motion.div
                 whileHover={{ x: 4, scale: 1.01 }}
                 transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
                 <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
-                  <CardContent className="p-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <motion.div
-                        className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
-                        whileHover={{ rotate: 15, scale: 1.1 }}
-                        transition={{ duration: 0.3 }}>
-                        <SettingsIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
-                      </motion.div>
-                      <span className="text-base font-medium text-gray-900 dark:text-white">
-                        Help & Support
-                      </span>
-                    </div>
-                    <motion.div
-                      whileHover={{ x: 4 }}
-                      transition={{ duration: 0.2 }}>
-                      <ChevronRight className="h-5 w-5 text-gray-400 dark:text-gray-500" />
-                    </motion.div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Link>
-
-            <Link to="/user/profile/about" className="block">
-              <motion.div
-                whileHover={{ x: 4, scale: 1.01 }}
-                transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
-                <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
-                  <CardContent className="p-4 flex items-center justify-between">
+                  <CardContent className="p-4  flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <motion.div
                         className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
@@ -890,12 +894,39 @@ export default function Profile() {
               </motion.div>
             </Link>
 
-            <Link to="/user/profile/report-safety-emergency" className="block">
+            <Link to="/user/feedback" className="block">
               <motion.div
                 whileHover={{ x: 4, scale: 1.01 }}
                 transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
                 <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
-                  <CardContent className="p-4 flex items-center justify-between">
+                  <CardContent className="p-4  flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <motion.div
+                        className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
+                        whileHover={{ rotate: 15, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}>
+                        <PenSquare className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                      </motion.div>
+                      <span className="text-base font-medium text-gray-900 dark:text-white">
+                        Send feedback
+                      </span>
+                    </div>
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}>
+                      <ChevronRight className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </Link>
+
+            <Link to="/user/report" className="block">
+              <motion.div
+                whileHover={{ x: 4, scale: 1.01 }}
+                transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
+                <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
+                  <CardContent className="p-4  flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <motion.div
                         className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
@@ -904,7 +935,34 @@ export default function Profile() {
                         <AlertTriangle className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                       </motion.div>
                       <span className="text-base font-medium text-gray-900 dark:text-white">
-                        Report a safety emergency
+                        Report safety concern
+                      </span>
+                    </div>
+                    <motion.div
+                      whileHover={{ x: 4 }}
+                      transition={{ duration: 0.2 }}>
+                      <ChevronRight className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </Link>
+
+            <Link to="/user/settings" className="block">
+              <motion.div
+                whileHover={{ x: 4, scale: 1.01 }}
+                transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
+                <Card className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer">
+                  <CardContent className="p-4  flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <motion.div
+                        className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
+                        whileHover={{ rotate: 15, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}>
+                        <SettingsIcon className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+                      </motion.div>
+                      <span className="text-base font-medium text-gray-900 dark:text-white">
+                        Settings
                       </span>
                     </div>
                     <motion.div
@@ -921,20 +979,18 @@ export default function Profile() {
               whileHover={{ x: 4, scale: 1.01 }}
               transition={{ duration: 0.2, type: "spring", stiffness: 300 }}>
               <Card
-                className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-white dark:bg-[#1a1a1a] py-0 rounded-xl shadow-sm border-0 dark:border-gray-800 cursor-pointer"
                 onClick={handleLogoutClick}>
-                <CardContent className="p-4 flex items-center justify-between">
+                <CardContent className="p-4  flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <motion.div
                       className="bg-gray-100 dark:bg-gray-800 rounded-full p-2"
                       whileHover={{ rotate: 15, scale: 1.1 }}
                       transition={{ duration: 0.3 }}>
-                      <Power
-                        className={`h-5 w-5 text-gray-700 dark:text-gray-300 ${isLoggingOut ? "animate-pulse" : ""}`}
-                      />
+                      <Power className="h-5 w-5 text-gray-700 dark:text-gray-300" />
                     </motion.div>
                     <span className="text-base font-medium text-gray-900 dark:text-white">
-                      {isLoggingOut ? "Logging out..." : "Log out"}
+                      Log out
                     </span>
                   </div>
                   <motion.div
@@ -947,181 +1003,138 @@ export default function Profile() {
             </motion.div>
           </div>
         </div>
+
+        {/* Footer Text */}
+        {/* <div className="mt-8 text-center bg-transparent">
+          <p className="text-gray-400 text-xs italic">
+            Made with love at {companyName}
+          </p>
+        </div> */}
       </div>
 
-      {/* Veg Mode Popup */}
+      {/* Veg Mode Dialog */}
       <Dialog open={vegModeOpen} onOpenChange={setVegModeOpen}>
-        <DialogContent className="max-w-sm md:max-w-md lg:max-w-lg w-[calc(100%-2rem)] rounded-2xl p-0 overflow-hidden">
-          <DialogHeader className="p-5 pb-3">
-            <DialogTitle className="text-lg font-bold text-gray-900">
-              Veg Mode
-            </DialogTitle>
-            <DialogDescription className="text-sm text-gray-500">
-              Filter restaurants and dishes based on your dietary preferences
+        <DialogContent className="sm:max-w-[425px] rounded-t-3xl sm:rounded-2xl bottom-0 sm:bottom-auto fixed sm:relative translate-y-0 sm:-translate-y-1/2 p-0 overflow-hidden border-0 dark:bg-[#1a1a1a]">
+          <DialogHeader className="p-6 pb-2 text-left">
+            <DialogTitle className="text-xl font-bold dark:text-white">Veg Mode</DialogTitle>
+            <DialogDescription className="dark:text-gray-400">
+              Only see vegetarian food options across the app.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-2 px-5 pb-5">
-            <button
-              onClick={() => {
-                handleVegModeUpdate(true);
-                setVegModeOpen(false);
-              }}
-              className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${vegMode
-                  ? "border-green-600 bg-green-50"
-                  : "border-gray-200 bg-white hover:border-gray-300"
-                }`}>
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${vegMode
-                      ? "border-green-600 bg-green-600"
-                      : "border-gray-300"
-                    }`}>
-                  {vegMode && <Check className="h-3 w-3 text-white" />}
+          <div className="p-4 pt-2">
+            <div className="space-y-2">
+              <button
+                className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
+                  vegMode
+                    ? "border-green-600 bg-green-50 dark:bg-green-950/20"
+                    : "border-gray-200 dark:border-gray-800"
+                }`}
+                onClick={() => handleVegModeUpdate(true)}>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 border border-green-600 flex items-center justify-center p-1">
+                    <div className="w-full h-full bg-green-600 rounded-full" />
+                  </div>
+                  <span className="font-semibold text-gray-900 dark:text-white">Pure Veg</span>
                 </div>
-                <div className="text-left">
-                  <p className="font-medium text-gray-900 text-sm">
-                    Veg Mode ON
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Show only vegetarian options
-                  </p>
+                {vegMode && <Check className="h-5 w-5 text-green-600" />}
+              </button>
+              <button
+                className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
+                  !vegMode
+                    ? "border-gray-400 bg-gray-50 dark:bg-gray-800/20"
+                    : "border-gray-200 dark:border-gray-800"
+                }`}
+                onClick={() => handleVegModeUpdate(false)}>
+                <div className="flex items-center gap-3">
+                  <div className="w-5 h-5 border border-red-600 flex items-center justify-center p-1">
+                    <div className="w-full h-full bg-red-600 rounded-full" />
+                  </div>
+                  <span className="font-semibold text-gray-900 dark:text-white">Show everything</span>
                 </div>
-              </div>
-              <Leaf
-                className={`h-5 w-5 ${vegMode ? "text-green-600" : "text-gray-400"}`}
-              />
-            </button>
-            <button
-              onClick={() => {
-                handleVegModeUpdate(false);
-                setVegModeOpen(false);
-              }}
-              className={`w-full p-3 rounded-xl border-2 transition-all flex items-center justify-between ${!vegMode
-                  ? "border-red-600 bg-red-50"
-                  : "border-gray-200 bg-white hover:border-gray-300"
-                }`}>
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${!vegMode ? "border-red-600 bg-red-600" : "border-gray-300"
-                    }`}>
-                  {!vegMode && <Check className="h-3 w-3 text-white" />}
-                </div>
-                <div className="text-left">
-                  <p className="font-medium text-gray-900 text-sm">
-                    Veg Mode OFF
-                  </p>
-                  <p className="text-xs text-gray-500">Show all options</p>
-                </div>
-              </div>
-            </button>
+                {!vegMode && <Check className="h-5 w-5 text-gray-600" />}
+              </button>
+            </div>
+            <Button
+              className="w-full mt-6 h-12 rounded-xl text-base font-bold bg-black dark:bg-white dark:text-black hover:opacity-90"
+              onClick={() => setVegModeOpen(false)}>
+              Done
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* Logout Confirmation Popup */}
-      {logoutConfirmOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 px-4">
-          <div className="w-full max-w-sm rounded-2xl bg-white dark:bg-[#1a1a1a] p-5 shadow-2xl border border-gray-200 dark:border-gray-800">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-              Log out?
-            </h3>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              Are you sure you want to log out?
-            </p>
-            <div className="mt-5 flex items-center gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                className="flex-1 rounded-xl"
-                onClick={() => setLogoutConfirmOpen(false)}
-                disabled={isLoggingOut}
-              >
-                No
-              </Button>
-              <Button
-                type="button"
-                className="flex-1 rounded-xl bg-[#CB202D] hover:bg-[#b01c27] text-white"
-                onClick={() => {
-                  setLogoutConfirmOpen(false);
-                  handleLogout();
-                }}
-                disabled={isLoggingOut}
-              >
-                Yes
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Appearance Popup */}
+      {/* Appearance Dialog */}
       <Dialog open={appearanceOpen} onOpenChange={setAppearanceOpen}>
-        <DialogContent className="max-w-sm md:max-w-md lg:max-w-lg w-[calc(100%-2rem)] rounded-2xl p-0 overflow-hidden bg-white dark:bg-[#1a1a1a] border-gray-200 dark:border-gray-800">
-          <DialogHeader className="p-5 pb-3">
-            <DialogTitle className="text-lg font-bold text-gray-900 dark:text-white">
-              Appearance
-            </DialogTitle>
-            <DialogDescription className="text-sm text-gray-500 dark:text-gray-400">
-              Choose your preferred theme
+        <DialogContent className="sm:max-w-[425px] rounded-t-3xl sm:rounded-2xl bottom-0 sm:bottom-auto fixed sm:relative translate-y-0 sm:-translate-y-1/2 p-0 overflow-hidden border-0 dark:bg-[#1a1a1a]">
+          <DialogHeader className="p-6 pb-2 text-left">
+            <DialogTitle className="text-xl font-bold dark:text-white">Appearance</DialogTitle>
+            <DialogDescription className="dark:text-gray-400">
+              Customize how {companyName} looks for you.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-2 px-5 pb-5">
-            <button
-              onClick={() => {
-                setAppearance("light");
-                setAppearanceOpen(false);
-              }}
-              className={`w-full p-3 rounded-xl border-2 transition-all flex items-center gap-3 ${appearance === "light"
-                  ? "border-blue-600 bg-blue-50 dark:border-blue-500 dark:bg-blue-900/20"
-                  : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
-                }`}>
-              <div
-                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${appearance === "light"
-                    ? "border-blue-600 bg-blue-600 dark:border-blue-500 dark:bg-blue-500"
-                    : "border-gray-300 dark:border-gray-600"
-                  }`}>
-                {appearance === "light" && (
-                  <Check className="h-3 w-3 text-white" />
-                )}
-              </div>
-              <Sun className="h-5 w-5 text-yellow-500 dark:text-yellow-400 flex-shrink-0" />
-              <div className="text-left">
-                <p className="font-medium text-gray-900 dark:text-white text-sm">
-                  Light
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Default light theme
-                </p>
-              </div>
-            </button>
-            <button
-              onClick={() => {
-                setAppearance("dark");
-                setAppearanceOpen(false);
-              }}
-              className={`w-full p-3 rounded-xl border-2 transition-all flex items-center gap-3 ${appearance === "dark"
-                  ? "border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                  : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600"
-                }`}>
-              <div
-                className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${appearance === "dark"
-                    ? "border-blue-600 bg-blue-600 dark:border-blue-500 dark:bg-blue-500"
-                    : "border-gray-300 dark:border-gray-600"
-                  }`}>
-                {appearance === "dark" && (
-                  <Check className="h-3 w-3 text-white" />
-                )}
-              </div>
-              <Moon className="h-5 w-5 text-gray-600 dark:text-gray-300 flex-shrink-0" />
-              <div className="text-left">
-                <p className="font-medium text-gray-900 dark:text-white text-sm">
-                  Dark
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Dark theme
-                </p>
-              </div>
-            </button>
+          <div className="p-4 pt-2">
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                className={`flex flex-col items-center gap-3 p-4 rounded-xl border transition-all ${
+                  appearance === "light"
+                    ? "border-black dark:border-white bg-gray-50 dark:bg-gray-800/20"
+                    : "border-gray-200 dark:border-gray-800"
+                }`}
+                onClick={() => setAppearance("light")}>
+                <div className="w-10 h-10 bg-white shadow-sm border rounded-full flex items-center justify-center">
+                  <Sun className="h-6 w-6 text-orange-500" />
+                </div>
+                <span className="font-semibold text-gray-900 dark:text-white">Light Mode</span>
+              </button>
+              <button
+                className={`flex flex-col items-center gap-3 p-4 rounded-xl border transition-all ${
+                  appearance === "dark"
+                    ? "border-white dark:border-white bg-gray-900"
+                    : "border-gray-200 dark:border-gray-800"
+                }`}
+                onClick={() => setAppearance("dark")}>
+                <div className="w-10 h-10 bg-gray-800 shadow-sm border border-gray-700 rounded-full flex items-center justify-center">
+                  <Moon className="h-6 w-6 text-blue-400" />
+                </div>
+                <span className="font-semibold text-gray-900 dark:text-white">Dark Mode</span>
+              </button>
+            </div>
+            <Button
+              className="w-full mt-6 h-12 rounded-xl text-base font-bold bg-black dark:bg-white dark:text-black hover:opacity-90"
+              onClick={() => setAppearanceOpen(false)}>
+              Apply changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Logout Confirmation Dialog */}
+      <Dialog open={logoutConfirmOpen} onOpenChange={setLogoutConfirmOpen}>
+        <DialogContent className="sm:max-w-[425px] rounded-2xl p-0 overflow-hidden border-0 dark:bg-[#1a1a1a]">
+          <div className="p-6 text-center">
+            <div className="w-16 h-16 bg-red-50 dark:bg-red-950/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Power className="h-8 w-8 text-red-600" />
+            </div>
+            <DialogTitle className="text-xl font-bold mb-2 dark:text-white">Log out of {companyName}?</DialogTitle>
+            <DialogDescription className="text-gray-500 dark:text-gray-400 mb-6">
+              Are you sure you want to log out? You'll need to sign in again to place orders.
+            </DialogDescription>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                className="flex-1 h-12 rounded-xl text-base font-semibold border-gray-200 dark:border-gray-800 dark:text-white dark:hover:bg-gray-800"
+                onClick={() => setLogoutConfirmOpen(false)}
+                disabled={isLoggingOut}>
+                Cancel
+              </Button>
+              <Button
+                className="flex-1 h-12 rounded-xl text-base font-semibold text-white bg-red-600 hover:bg-red-700 disabled:opacity-50"
+                onClick={handleLogout}
+                loading={isLoggingOut}
+                disabled={isLoggingOut}>
+                Log out
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

@@ -10,6 +10,8 @@ import useAppBackNavigation from "@food/hooks/useAppBackNavigation"
 import { useLocation as useLocationHook } from "@food/hooks/useLocation"
 import { useProfile } from "@food/context/ProfileContext"
 import { FaLocationDot } from "react-icons/fa6"
+import { RED } from "@food/constants/color"
+
 // Using placeholder for upto 50 off banner
 const upto50off = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=200&fit=crop"
 
@@ -254,7 +256,8 @@ export default function DiningExplore50() {
                   }
                 }}
                 placeholder="Search for restaurants, cuisines, dishes..."
-                className="w-full h-12 sm:h-14 md:h-16 pl-12 sm:pl-14 pr-12 sm:pr-14 rounded-xl border-2 border-gray-200 focus:border-[#EB590E] bg-white shadow-sm text-base sm:text-lg md:text-xl"
+                className="w-full h-12 sm:h-14 md:h-16 pl-12 sm:pl-14 pr-12 sm:pr-14 rounded-xl border-2 border-gray-200 focus:border-[#E2281B] bg-white shadow-sm text-base sm:text-lg md:text-xl"
+                style={{ "--tw-ring-color": RED }}
               />
               <Search className="absolute left-4 sm:left-5 md:left-6 top-1/2 -translate-y-1/2 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-gray-400" />
               <Button
@@ -317,9 +320,10 @@ export default function DiningExplore50() {
                       variant="outline"
                       onClick={() => toggleFilter(filter.id)}
                       className={`h-7 sm:h-8 px-2 sm:px-3 rounded-md flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 transition-all font-medium ${isActive
-                        ? 'bg-[#EB590E] text-white border-[#EB590E] hover:bg-[#D94F0C]'
+                        ? 'text-white border-transparent'
                         : 'bg-white border border-gray-200 hover:bg-gray-50 text-gray-600'
                         }`}
+                      style={isActive ? { backgroundColor: RED } : {}}
                     >
                       {Icon && <Icon className={`h-3 w-3 sm:h-4 sm:w-4 ${isActive ? 'fill-white' : ''}`} />}
                       <span className="text-xs sm:text-sm font-bold text-black">{filter.label}</span>
@@ -385,7 +389,7 @@ export default function DiningExplore50() {
                         </Button>
 
                         {/* Blue Section - Bottom 40% */}
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#EB590E] to-transparent" style={{ height: '40%' }}>
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#E2281B] to-transparent" style={{ height: '40%' }}>
                           <div className="h-full flex flex-col justify-end">
                             <div className="pl-4 sm:pl-5 pb-4 sm:pb-5">
                               <p className="text-white text-xs sm:text-sm font-medium uppercase tracking-wide mb-1">
@@ -426,7 +430,7 @@ export default function DiningExplore50() {
                         {/* Offer Badge */}
                         {restaurant.offer && (
                           <div className="flex items-center gap-2 text-sm">
-                            <BadgePercent className="h-4 w-4 text-[#EB590E]" strokeWidth={2} />
+                            <BadgePercent className="h-4 w-4" style={{ color: RED }} strokeWidth={2} />
                             <span className="text-gray-700 font-medium">{restaurant.offer}</span>
                           </div>
                         )}
@@ -460,7 +464,8 @@ export default function DiningExplore50() {
                   setSortBy(null)
                   setSelectedCuisine(null)
                 }}
-                className="text-[#EB590E] font-medium text-sm"
+                className="font-medium text-sm"
+                style={{ color: RED }}
               >
                 Clear all
               </button>
@@ -484,11 +489,12 @@ export default function DiningExplore50() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveFilterTab(tab.id)}
-                      className={`flex flex-col items-center gap-1 py-4 px-2 text-center relative transition-colors ${isActive ? 'bg-white text-green-600' : 'text-gray-500 hover:bg-gray-100'
+                      className={`flex flex-col items-center gap-1 py-4 px-2 text-center relative transition-colors ${isActive ? 'bg-white' : 'text-gray-500 hover:bg-gray-100'
                         }`}
+                      style={isActive ? { color: RED } : {}}
                     >
                       {isActive && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#EB590E] rounded-r" />
+                        <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r" style={{ backgroundColor: RED }} />
                       )}
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
                       <span className="text-xs font-medium leading-tight">{tab.label}</span>
@@ -517,7 +523,7 @@ export default function DiningExplore50() {
                             : 'border-gray-200 hover:border-green-500'
                             }`}
                         >
-                          <span className={`text-sm font-medium ${sortBy === option.id ? 'text-green-600' : 'text-gray-700'}`}>
+                          <span className={`text-sm font-medium`} style={sortBy === option.id ? { color: RED } : { color: '#374151' }}>
                             {option.label}
                           </span>
                         </button>
@@ -567,8 +573,8 @@ export default function DiningExplore50() {
                           : 'border-gray-200 hover:border-green-500'
                           }`}
                       >
-                        <Star className={`h-6 w-6 ${activeFilters.has('rating-35-plus') ? 'text-green-600 fill-green-600' : 'text-gray-400'}`} />
-                        <span className={`text-sm font-medium ${activeFilters.has('rating-35-plus') ? 'text-green-600' : 'text-gray-700'}`}>Rated 3.5+</span>
+                        <Star className={`h-6 w-6 ${activeFilters.has('rating-35-plus') ? 'fill-current' : 'text-gray-400'}`} style={activeFilters.has('rating-35-plus') ? { color: RED } : {}} />
+                        <span className={`text-sm font-medium`} style={activeFilters.has('rating-35-plus') ? { color: RED } : { color: '#374151' }}>Rated 3.5+</span>
                       </button>
                       <button
                         onClick={() => toggleFilter('rating-4-plus')}
@@ -664,7 +670,7 @@ export default function DiningExplore50() {
                             : 'border-gray-200 hover:border-green-500'
                             }`}
                         >
-                          <span className={`text-sm font-medium ${selectedCuisine === cuisine ? 'text-green-600' : 'text-gray-700'}`}>
+                          <span className={`text-sm font-medium`} style={selectedCuisine === cuisine ? { color: RED } : { color: '#374151' }}>
                             {cuisine}
                           </span>
                         </button>
@@ -686,9 +692,10 @@ export default function DiningExplore50() {
               <button
                 onClick={() => setIsFilterOpen(false)}
                 className={`flex-1 py-3 font-semibold rounded-xl transition-colors ${activeFilters.size > 0 || sortBy || selectedCuisine
-                  ? 'bg-green-600 text-white hover:bg-green-700'
+                  ? 'text-white hover:opacity-90'
                   : 'bg-gray-200 text-gray-500'
                   }`}
+                style={(activeFilters.size > 0 || sortBy || selectedCuisine) ? { backgroundColor: RED } : {}}
               >
                 {activeFilters.size > 0 || sortBy || selectedCuisine
                   ? `Show ${filteredRestaurants.length} results`
@@ -701,4 +708,3 @@ export default function DiningExplore50() {
     </AnimatedPage>
   )
 }
-

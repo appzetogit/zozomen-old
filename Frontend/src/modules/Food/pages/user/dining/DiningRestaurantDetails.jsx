@@ -4,6 +4,7 @@ import { restaurantAPI } from "@food/api"
 import { useProfile } from "@food/context/ProfileContext"
 import { getMenuFromResponse } from "@food/utils/menuItems"
 import useAppBackNavigation from "@food/hooks/useAppBackNavigation"
+import { RED } from "@food/constants/color"
 import {
     ArrowLeft,
     Bookmark,
@@ -155,7 +156,7 @@ export default function DiningRestaurantDetails() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#f6f7fb]">
-        <Loader2 className="h-8 w-8 animate-spin text-[#EB590E]" />
+        <Loader2 className="h-8 w-8 animate-spin" style={{ color: RED }} />
       </div>
     )
   }
@@ -164,7 +165,7 @@ export default function DiningRestaurantDetails() {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-[#f6f7fb] px-4 text-center">
         <h2 className="text-2xl font-bold text-[#23180f]">Restaurant not found</h2>
-        <Button onClick={goBack} variant="outline">
+        <Button onClick={goBack} variant="outline" style={{ borderColor: RED, color: RED }}>
           Go Back
         </Button>
       </div>
@@ -330,33 +331,33 @@ export default function DiningRestaurantDetails() {
                     : "cursor-not-allowed border-[#f2d7da] bg-[#fff5f6] text-[#c06a79] opacity-80"
                 }`}
               >
-              <Ticket className="h-[15px] w-[15px] text-[#ef4c62]" />
+              <Ticket className="h-[15px] w-[15px]" style={{ color: RED }} />
               <span>{isDiningEnabled ? "Book a table" : "Dining paused"}</span>
               </button>
-              <button className="flex h-[52px] items-center justify-center rounded-full border border-[#f1ebee] bg-white text-[#ef4c62] shadow-[0_10px_24px_rgba(15,23,42,0.05)]">
+              <button className="flex h-[52px] items-center justify-center rounded-full border border-[#f1ebee] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.05)]" style={{ color: RED }}>
                 <Tag className="h-[15px] w-[15px]" />
               </button>
-              <button className="flex h-[52px] items-center justify-center rounded-full border border-[#f1ebee] bg-white text-[#ef4c62] shadow-[0_10px_24px_rgba(15,23,42,0.05)]">
+              <button className="flex h-[52px] items-center justify-center rounded-full border border-[#f1ebee] bg-white shadow-[0_10px_24px_rgba(15,23,42,0.05)]" style={{ color: RED }}>
                 <Clock3 className="h-[15px] w-[15px]" />
               </button>
             </div>
 
             {!isDiningEnabled && (
-              <div className="mt-3 rounded-[18px] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              <div className="mt-3 rounded-[18px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
                 Dining bookings are currently turned off by the restaurant.
               </div>
             )}
 
-          <div className="mt-4 overflow-hidden rounded-[18px] bg-[linear-gradient(180deg,#fff0ce,#fff8ea)] px-4 py-4 shadow-[0_8px_24px_rgba(238,184,68,0.22)]">
+          <div className="mt-4 overflow-hidden rounded-[18px] px-4 py-4 shadow-[0_8px_24px_rgba(226,40,27,0.12)]" style={{ background: `linear-gradient(180deg, ${RED}15, ${RED}05)` }}>
             <div className="flex items-center justify-between gap-3">
-              <div className="rounded-full bg-[#8e77ff]/10 p-2 text-[#7f69eb]">
+              <div className="rounded-full bg-red-100 p-2 text-red-600">
                 <Percent className="h-5 w-5" />
               </div>
               <div className="flex-1 text-center">
-                <p className="text-[33px] font-black leading-none tracking-[-0.04em] text-[#2c2352]">20% CASHBACK</p>
-                <p className="mt-1 text-[14px] font-medium text-[#4a4068]">on every dining bill</p>
+                <p className="text-[33px] font-black leading-none tracking-[-0.04em] text-red-900">20% CASHBACK</p>
+                <p className="mt-1 text-[14px] font-medium text-red-800">on every dining bill</p>
               </div>
-              <div className="rounded-full bg-[#8e77ff]/10 p-2 text-[#7f69eb]">
+              <div className="rounded-full bg-red-100 p-2 text-red-600">
                 <Percent className="h-5 w-5" />
               </div>
             </div>
@@ -376,9 +377,10 @@ export default function DiningRestaurantDetails() {
                 }}
                 className={`shrink-0 rounded-full border px-4 py-2 text-sm transition-colors ${
                   activeTab === tab.id
-                    ? "border-[#ef6b73] bg-white text-[#2a2018]"
+                    ? "bg-white text-[#2a2018]"
                     : "border-[#ece9e1] bg-[#fafafa] text-[#8b8881]"
                 }`}
+                style={activeTab === tab.id ? { borderColor: RED } : {}}
               >
                 {tab.label}
               </button>
@@ -391,10 +393,10 @@ export default function DiningRestaurantDetails() {
         <section id="restaurant-prebook">
           <div>
             <h2 className="text-[29px] font-black leading-none text-[#23180f]">Pre-book offers</h2>
-            <p className="mt-1 text-[15px] text-[#ef4c62]">Limited slots with extra offers</p>
+            <p className="mt-1 text-[15px]" style={{ color: RED }}>Limited slots with extra offers</p>
           </div>
 
-          <div className="mt-3 overflow-hidden rounded-[18px] bg-[linear-gradient(135deg,#0f4a87,#0b2954_70%)] text-white shadow-[0_10px_26px_rgba(8,52,95,0.25)]">
+          <div className="mt-3 overflow-hidden rounded-[18px] text-white shadow-[0_10px_26px_rgba(226,40,27,0.2)]" style={{ background: `linear-gradient(135deg, ${RED}, #b31d14)` }}>
             <div className="flex items-start justify-between px-4 pb-3 pt-4">
               <div>
                 <p className="text-[28px] font-black leading-none">Flat 50% OFF</p>
@@ -414,9 +416,9 @@ export default function DiningRestaurantDetails() {
           <div className="flex items-end justify-between gap-3">
             <div>
               <h2 className="text-[28px] font-black leading-none text-[#23180f]">Menu</h2>
-              <p className="mt-2 text-[13px] text-[#e19135]">Last updated a month ago</p>
+              <p className="mt-2 text-[13px] text-gray-400">Last updated a month ago</p>
             </div>
-            <div className="rounded-full bg-[#fff3e6] px-3 py-1 text-xs font-semibold text-[#e58a2c]">
+            <div className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
               {featuredSections.length || 2} dishes
             </div>
           </div>
@@ -473,7 +475,7 @@ export default function DiningRestaurantDetails() {
           <div className="mt-4 rounded-[18px] border border-[#ececf4] bg-[#fafbff] p-4">
             <div className="space-y-4 text-[14px] text-[#5f6474]">
               <div className="flex items-start gap-3">
-                <IndianRupee className="mt-0.5 h-4 w-4 shrink-0 text-[#f0b500]" />
+                <IndianRupee className="mt-0.5 h-4 w-4 shrink-0 text-gray-400" />
                 <p>{costForTwo}</p>
               </div>
 
@@ -483,7 +485,7 @@ export default function DiningRestaurantDetails() {
               </div>
 
               <div className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#ef4c62]" />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0" style={{ color: RED }} />
                 <p>{address}</p>
               </div>
             </div>
@@ -526,9 +528,10 @@ export default function DiningRestaurantDetails() {
             disabled={!isDiningEnabled}
             className={`h-12 w-full rounded-2xl border text-[17px] font-medium transition-colors ${
               isDiningEnabled
-                ? "border-[#f3b4be] bg-white text-[#ef4c62] hover:bg-[#fff6f8]"
-                : "cursor-not-allowed border-[#f2d7da] bg-[#fff5f6] text-[#c06a79] opacity-80"
+                ? "bg-white hover:bg-red-50"
+                : "cursor-not-allowed border-red-100 bg-red-50 text-red-300 opacity-80"
             }`}
+            style={isDiningEnabled ? { borderColor: RED, color: RED } : {}}
           >
             {isDiningEnabled ? "Book a table" : "Dining paused"}
           </Button>
@@ -566,9 +569,10 @@ export default function DiningRestaurantDetails() {
                   onClick={() => setSelectedGuests(count)}
                   className={`rounded-2xl border px-3 py-4 text-sm font-bold transition-colors ${
                     selectedGuests === count
-                      ? "border-[#ef8f6a] bg-[#fff4f0] text-[#d5541b]"
+                      ? "bg-red-50"
                       : "border-[#ece7de] bg-white text-[#23180f]"
                   }`}
+                  style={selectedGuests === count ? { borderColor: RED, color: RED } : {}}
                 >
                   {count}
                 </button>
@@ -577,7 +581,8 @@ export default function DiningRestaurantDetails() {
 
             <Button
               onClick={handleContinueBooking}
-              className="mt-6 h-12 w-full rounded-2xl bg-[#f04f61] text-base font-bold text-white hover:bg-[#e13e52]"
+              className="mt-6 h-12 w-full rounded-2xl text-base font-bold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: RED }}
             >
               Continue
             </Button>

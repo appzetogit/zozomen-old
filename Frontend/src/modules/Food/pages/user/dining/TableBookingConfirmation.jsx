@@ -8,6 +8,8 @@ import useAppBackNavigation from "@food/hooks/useAppBackNavigation"
 import { useEffect } from "react"
 import { toast } from "sonner"
 import Loader from "@food/components/Loader"
+import { RED } from "@food/constants/color"
+
 const debugLog = (...args) => {}
 const debugWarn = (...args) => {}
 const debugError = (...args) => {}
@@ -113,7 +115,7 @@ export default function TableBookingConfirmation() {
     return (
         <AnimatedPage className="bg-slate-50 min-h-screen pb-24">
             {/* Header */}
-            <div className="bg-[#EB590E] text-white px-4 py-4 sticky top-0 z-50 shadow-md">
+            <div className="text-white px-4 py-4 sticky top-0 z-50 shadow-md" style={{ backgroundColor: RED }}>
                 <div className="flex items-center gap-3">
                     <button onClick={goBack} className="p-1 hover:bg-white/10 rounded-full transition-colors">
                         <ArrowLeft className="w-6 h-6" />
@@ -127,8 +129,8 @@ export default function TableBookingConfirmation() {
                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
                     <div className="p-4 space-y-4">
                         <div className="flex items-start gap-3">
-                            <div className="bg-[#FFF2EB] p-2 rounded-xl">
-                                <Calendar className="w-5 h-5 text-[#EB590E]" />
+                            <div className="bg-red-50 p-2 rounded-xl">
+                                <Calendar className="w-5 h-5" style={{ color: RED }} />
                             </div>
                             <div>
                                 <p className="font-bold text-gray-900">{formattedDate} at {timeSlot}</p>
@@ -182,7 +184,7 @@ export default function TableBookingConfirmation() {
                     <div className="space-y-2">
                         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex items-center justify-between">
                             <div className="flex items-start gap-3">
-                                <div className="text-[#EB590E] mt-1">
+                                <div className="mt-1" style={{ color: RED }}>
                                     <Edit2 className="w-5 h-5" />
                                 </div>
                                 <div>
@@ -221,7 +223,7 @@ export default function TableBookingConfirmation() {
                             <p className="font-bold text-gray-900">{user?.name || "Shailu"}</p>
                             <p className="text-sm text-slate-400 mt-1">{user?.phone || user?.email || "8090512291"}</p>
                         </div>
-                        <button className="text-red-500 text-sm font-bold hover:underline">Edit</button>
+                        <button className="text-sm font-bold hover:underline" style={{ color: RED }}>Edit</button>
                     </div>
                 </div>
 
@@ -260,7 +262,8 @@ export default function TableBookingConfirmation() {
                 <Button
                     onClick={handleBooking}
                     disabled={bookingInProgress}
-                    className="w-full h-14 bg-[#ef4444] hover:bg-red-600 text-white font-bold text-lg rounded-2xl shadow-xl shadow-red-200 transition-all active:scale-[0.98]"
+                    className="w-full h-14 text-white font-bold text-lg rounded-2xl shadow-xl transition-all active:scale-[0.98]"
+                    style={{ backgroundColor: RED }}
                 >
                     {bookingInProgress ? "Confirming..." : "Confirm your seat"}
                 </Button>
@@ -268,4 +271,3 @@ export default function TableBookingConfirmation() {
         </AnimatedPage>
     )
 }
-
