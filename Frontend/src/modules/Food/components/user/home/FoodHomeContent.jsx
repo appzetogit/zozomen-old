@@ -165,6 +165,8 @@ const FoodRestaurantCard = memo(function FoodRestaurantCard({
   );
 });
 
+import { RED } from "@food/constants/color";
+
 function FoodHomeContent({
   handleVegModeChange,
   navigate,
@@ -223,7 +225,8 @@ function FoodHomeContent({
           <div className="hidden h-[1.5px] flex-1 bg-gradient-to-r from-gray-200 to-transparent sm:block mx-4" />
           <Link
             to="/user/categories"
-            className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs font-black text-[#ef4f5f] sm:text-sm bg-[#ef4f5f]/10 px-4 py-2 rounded-full hover:bg-[#ef4f5f]/20 transition-all"
+            className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs font-black sm:text-sm bg-red-600/10 px-4 py-2 rounded-full hover:bg-red-600/20 transition-all"
+            style={{ color: RED }}
           >
             Explore <ArrowDownUp className="h-3 w-3 rotate-90" />
           </Link>
@@ -236,7 +239,7 @@ function FoodHomeContent({
               to={`/user/category/${category.slug}`}
               className="group flex flex-col items-center gap-4"
             >
-              <div className="relative aspect-square w-[76px] sm:w-[88px] overflow-hidden rounded-full border-[3px] border-white ring-1 ring-gray-100 bg-white shadow-lg transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-active:scale-95 group-hover:border-[#ef4f5f]/20">
+              <div className="relative aspect-square w-[76px] sm:w-[88px] overflow-hidden rounded-full border-[3px] border-white ring-1 ring-gray-100 bg-white shadow-lg transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-active:scale-95 group-hover:border-red-600/20">
                 <OptimizedImage
                   src={category.image}
                   alt={category.name}
@@ -245,7 +248,9 @@ function FoodHomeContent({
                  {/* Shiny overlay on hover */}
                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <span className="text-center text-[12px] font-black leading-tight text-gray-800 tracking-tighter opacity-70 group-hover:opacity-100 group-hover:text-[#ef4f5f] transition-all">
+              <span className="text-center text-[12px] font-black leading-tight text-gray-800 tracking-tighter opacity-70 group-hover:opacity-100 transition-all"
+                style={{ '--hover-color': RED }}
+              >
                 {category.name}
               </span>
             </Link>
@@ -345,8 +350,8 @@ function FoodHomeContent({
                       <p className="truncate text-sm font-semibold tracking-tight text-gray-900 dark:text-white">
                         {restaurant.name}
                       </p>
-                      <p className="mt-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-orange-600">
-                        <Flame className="h-3.5 w-3.5 fill-orange-600" />
+                      <p className="mt-1 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-red-600">
+                        <Flame className="h-3.5 w-3.5 fill-red-600" />
                         Near & Fast
                       </p>
                     </div>
@@ -386,11 +391,11 @@ function FoodHomeContent({
               >
                 <Link to={item.href} className="flex-shrink-0">
                   <div className="group flex w-24 flex-col items-center gap-3 sm:w-28">
-                    <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-3xl border border-gray-100 bg-white p-3 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.08)] transition-all duration-500 group-hover:border-orange-500/30 group-hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.12)] dark:border-gray-800 dark:bg-[#1a1a1a] sm:h-24 sm:w-24">
+                    <div className="relative flex h-20 w-20 items-center justify-center overflow-hidden rounded-3xl border border-gray-100 bg-white p-3 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.08)] transition-all duration-500 group-hover:border-red-500/30 group-hover:shadow-[0_10px_25px_-5px_rgba(0,0,0,0.12)] dark:border-gray-800 dark:bg-[#1a1a1a] sm:h-24 sm:w-24">
                       <div
                         className={`absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10 bg-gradient-to-br ${
                           index % 3 === 0
-                            ? "from-orange-500 to-red-500"
+                            ? "from-red-500 to-red-600"
                             : index % 3 === 1
                               ? "from-blue-500 to-purple-500"
                               : "from-green-500 to-teal-500"

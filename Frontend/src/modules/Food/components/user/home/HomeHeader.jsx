@@ -28,6 +28,8 @@ import foodPattern from "@food/assets/food_pattern_background.png";
 import useNotificationInbox from "@food/hooks/useNotificationInbox";
 import { useCart } from "@food/context/CartContext";
 
+import { RED } from "@food/constants/color";
+
 const normalizeHex = (hex, fallback = "#8e24aa") => {
   const value = String(hex || "").trim();
   return /^#[0-9a-f]{6}$/i.test(value) ? value : fallback;
@@ -56,10 +58,10 @@ const quickTheme = (baseColor) => {
 
 const foodTheme = {
   topBg: "transparent",
-  accent: "#F6881F",
+  accent: RED,
   text: "#ffffff",
   activeBg: "#ffffff",
-  activeText: "#C4510A",
+  activeText: RED,
   inactiveBg: "rgba(255,255,255,0.14)",
   inactiveBorder: "rgba(255,255,255,0.12)",
 };
@@ -203,21 +205,21 @@ export default function HomeHeader({
 
       {showBanner && isFood && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <Pizza className="absolute top-10 right-[15%] opacity-[0.10] text-[#F6881F]" size={64} />
-          <Beef className="absolute top-40 left-[10%] opacity-[0.08] text-[#F6881F]" size={80} />
-          <ChefHat className="absolute bottom-[20%] right-[20%] opacity-[0.08] text-[#F6881F]" size={56} />
-          <Coffee className="absolute top-20 left-[30%] opacity-[0.08] text-[#F6881F]" size={48} />
-          <Soup className="absolute bottom-[40%] left-[5%] opacity-[0.05] text-[#F6881F]" size={72} />
+          <Pizza className="absolute top-10 right-[15%] opacity-[0.10]" style={{ color: RED }} size={64} />
+          <Beef className="absolute top-40 left-[10%] opacity-[0.08]" style={{ color: RED }} size={80} />
+          <ChefHat className="absolute bottom-[20%] right-[20%] opacity-[0.08]" style={{ color: RED }} size={56} />
+          <Coffee className="absolute top-20 left-[30%] opacity-[0.08]" style={{ color: RED }} size={48} />
+          <Soup className="absolute bottom-[40%] left-[5%] opacity-[0.05]" style={{ color: RED }} size={72} />
         </div>
       )}
 
       {showHeaderContent && (
-        <div className="relative z-10 pt-0 pb-3">
+        <div className="relative z-10 pt-0 pb-0">
           {isFood && !useSolidHeader && (
             <div className="absolute inset-0 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
           )}
           <div
-            className={`rounded-none border-none px-3 pt-2 pb-3 ${
+            className={`rounded-none border-none px-3 pt-2 pb-2 ${
               useSolidHeader
                 ? "bg-white shadow-[0_8px_22px_rgba(15,23,42,0.06)]"
                 : "bg-[linear-gradient(180deg,rgba(84,20,15,0.46),rgba(22,10,8,0.26))] shadow-[0_16px_34px_rgba(0,0,0,0.18)] backdrop-blur-[4px]"
@@ -271,12 +273,12 @@ export default function HomeHeader({
                       <h3 className="font-bold text-gray-900 flex items-center gap-2">
                         Notifications
                         {unreadCount > 0 && (
-                          <Badge variant="secondary" className="bg-orange-100 text-orange-600 border-none text-[10px] h-4">
+                          <Badge variant="secondary" className="bg-red-100 text-red-600 border-none text-[10px] h-4">
                             {unreadCount} New
                           </Badge>
                         )}
                       </h3>
-                      <Link to="/food/user/notifications" className="text-xs font-bold text-orange-600">
+                      <Link to="/food/user/notifications" className="text-xs font-bold text-red-600">
                         {mergedNotifications.length > 0 ? "View All" : ""}
                       </Link>
                     </div>
@@ -284,7 +286,7 @@ export default function HomeHeader({
                       {mergedNotifications.length > 0 ? (
                         mergedNotifications.slice(0, 5).map((item) => (
                           <div key={item.id} className="p-4 flex items-start gap-3 border-b border-gray-50 last:border-0">
-                            <div className="mt-1 p-2 rounded-full bg-orange-100/50 text-orange-600">
+                            <div className="mt-1 p-2 rounded-full bg-red-100/50 text-red-600">
                               <Bell className="h-4 w-4" />
                             </div>
                             <div className="flex-1 min-w-0">
@@ -326,7 +328,7 @@ export default function HomeHeader({
               >
                 <ShoppingCart className={actionIconClassName} strokeWidth={2.2} />
                 {cartCount > 0 && (
-                  <span className="absolute -right-1 -top-1 min-w-[18px] rounded-full bg-[#F6881F] px-1 py-[1px] text-center text-[10px] font-bold leading-none text-white">
+                  <span className="absolute -right-1 -top-1 min-w-[18px] rounded-full px-1 py-[1px] text-center text-[10px] font-bold leading-none text-white" style={{ backgroundColor: RED }}>
                     {cartCount > 99 ? "99+" : cartCount}
                   </span>
                 )}
@@ -339,8 +341,8 @@ export default function HomeHeader({
             className={searchBoxClassName}
             onClick={handleSearchFocus}
           >
-            <div className="absolute left-0 top-0 bottom-0 w-[2.5px] rounded-l-[12px] bg-gradient-to-b from-[#F6881F] to-[#FF5E3A]" />
-            <Search className="h-[16px] w-[16px] ml-1.5 mr-2 flex-shrink-0 text-[#F6881F]" strokeWidth={2.3} />
+            <div className="absolute left-0 top-0 bottom-0 w-[2.5px] rounded-l-[12px]" style={{ background: `linear-gradient(to bottom, ${RED}, ${RED})` }} />
+            <Search className="h-[16px] w-[16px] ml-1.5 mr-2 flex-shrink-0" style={{ color: RED }} strokeWidth={2.3} />
             <div className="flex-1 overflow-hidden relative h-[20px]">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -356,9 +358,9 @@ export default function HomeHeader({
               </AnimatePresence>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-[1px] h-[16px] bg-orange-200" />
-              <div className="h-[28px] w-[28px] rounded-full flex items-center justify-center bg-orange-50">
-                <Mic className="h-[14px] w-[14px] text-[#F6881F]" strokeWidth={2.3} />
+              <div className="w-[1px] h-[16px] bg-red-200" />
+              <div className="h-[28px] w-[28px] rounded-full flex items-center justify-center bg-red-50">
+                <Mic className="h-[14px] w-[14px]" style={{ color: RED }} strokeWidth={2.3} />
               </div>
             </div>
           </div>

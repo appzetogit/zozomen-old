@@ -3,6 +3,7 @@ import discountPromoIcon from "@food/assets/category-icons/discount_promo.png";
 import vegPromoIcon from "@food/assets/category-icons/veg_promo.png";
 import pricePromoIcon from "@food/assets/category-icons/price_promo.png";
 import comboPromoIcon from "@food/assets/category-icons/combo_promo.png";
+import { RED } from "@food/constants/color";
 
 export default function PromoRow({ handleVegModeChange, navigate, isVegMode, toggleRef }) {
   const promoCardsData = [
@@ -33,8 +34,8 @@ export default function PromoRow({ handleVegModeChange, navigate, isVegMode, tog
       title: "UNDER",
       value: "₹250",
       icon: pricePromoIcon,
-      gradient: 'linear-gradient(145deg, #e65100, #f57c00)',
-      shadowColor: 'rgba(230,81,0,0.35)',
+      gradient: `linear-gradient(145deg, ${RED}, #B71C1C)`,
+      shadowColor: 'rgba(226,40,27,0.35)',
       textColor: '#ffffff',
       subTextColor: 'rgba(255,255,255,0.80)',
     },
